@@ -19,6 +19,7 @@ struct Node
 int counterCode = 0;
 Node *tail;
 Node *head;
+string kodePenerbangan = "JT-048";
 
 void clearScreen() {
   system("clear || cls");
@@ -28,7 +29,7 @@ void pause(int detik) {
   this_thread::sleep_for(chrono::seconds(detik));
 }
 
-void addLast(Node *&head, Node *&tail, string kodePenerbangan, string tujuan, string status) {
+void addLast(Node *&head, Node *&tail, string tujuan, string status) {
   Node *newNode = new Node;
 
   stringstream stream;
@@ -57,15 +58,8 @@ void addLastMenu() {
   cout << "|                 TAMBAH JADWAL PENERBANGAN                  |\n";
   cout << "+------------------------------------------------------------+\n";
 
-  string kodePenerbangan;
   string tujuan;
   string status;
-
-  cout << "+-----------------------------+\n";
-  cout << "| Masukkan Kode Penerbangan   |\n";
-  cout << "+-----------------------------+\n";
-  cout << "+-> ";
-  getline(cin, kodePenerbangan);
 
   cout << "+-----------------------------+\n";
   cout << "| Masukkan Tujuan Penerbangan |\n";
@@ -79,12 +73,12 @@ void addLastMenu() {
   cout << "+-> ";
   getline(cin, status);
 
-  addLast(head, tail, kodePenerbangan, tujuan, status);
+  addLast(head, tail, tujuan, status);
 
   cout << "\nData penerbangan berhasil ditambahkan!";
 }
 
-void addSpecific(Node *&head, Node *&tail, int posisi, string kodePenerbangan, string tujuan, string status) {
+void addSpecific(Node *&head, Node *&tail, int posisi, string tujuan, string status) {
   
   if (posisi < 1) {
     cout << "Mana ada posisi mines bang" << endl;
@@ -93,7 +87,7 @@ void addSpecific(Node *&head, Node *&tail, int posisi, string kodePenerbangan, s
 
   if (posisi == 1)
   {
-    addLast(head, tail, kodePenerbangan, tujuan, status);
+    addLast(head, tail, tujuan, status);
     return;
   }
   
@@ -107,7 +101,7 @@ void addSpecific(Node *&head, Node *&tail, int posisi, string kodePenerbangan, s
   if (temp == nullptr) {
     cout << "Position invalid!" << endl;
   } else if (temp->next == nullptr){
-    addLast(head, tail, kodePenerbangan, tujuan, status);
+    addLast(head, tail, tujuan, status);
   } else{
     Node *newNode = new Node;
 
@@ -115,12 +109,12 @@ void addSpecific(Node *&head, Node *&tail, int posisi, string kodePenerbangan, s
     stream << counterCode;
     string stringCounter = stream.str();
 
-    newNode->penerbangan.kodePenerbangan = kodePenerbangan + "-" + stringCounter;
+    newNode->penerbangan.kodePenerbangan = (counterCode == 0) ? kodePenerbangan : kodePenerbangan + "-" + stringCounter;
     newNode->penerbangan.tujuan = tujuan;
     newNode->penerbangan.status = status;
     newNode->next = temp->next;
     temp->next = newNode;
-
+    counterCode++;
   }
 }
 
@@ -132,15 +126,8 @@ void addSpesificMenu() {
 
   cout << "\nMasukkan data penerbangan yang ingin disisipkan!" << endl;
 
-  string kodePenerbangan;
   string tujuan;
   string status;
-
-  cout << "+-----------------------------+\n";
-  cout << "| Masukkan Kode Penerbangan   |\n";
-  cout << "+-----------------------------+\n";
-  cout << "+-> ";
-  getline(cin, kodePenerbangan);
 
   cout << "+-----------------------------+\n";
   cout << "| Masukkan Tujuan Penerbangan |\n";
@@ -154,7 +141,7 @@ void addSpesificMenu() {
   cout << "+-> ";
   getline(cin, status);
 
-  addSpecific(head, tail, 9, kodePenerbangan, tujuan, status);
+  addSpecific(head, tail, 9, tujuan, status);
 
   cout << "\nData penerbangan berhasil ditambahkan!";
 }
@@ -279,16 +266,16 @@ int main() {
   head = nullptr;
   tail = nullptr;
 
-  addLast(head, tail, "JT-048", "Surabaya (SUB)", "Tepat Waktu");
-  addLast(head, tail, "JT-048", "Jakarta (CGK)", "Naik Pesawat");
-  addLast(head, tail, "JT-048", "Medan (KNO)", "Terlambat");
-  addLast(head, tail, "JT-048", "Makassar (UPG)", "Tepat Waktu");
-  addLast(head, tail, "JT-048", "Yogyakarta (YIA)", "Naik Pesawat");
-  addLast(head, tail, "JT-048", "Denpasar (DPS)", "Terlambat");
-  addLast(head, tail, "JT-048", "Bandung (BDO)", "Tepat Waktu");
-  addLast(head, tail, "JT-048", "Semarang (SRG)", "Naik Pesawat");
-  addLast(head, tail, "JT-048", "Palembang (PLM)", "Terlambat");
-  addLast(head, tail, "JT-048", "Balikpapan (BPN)", "Tepat Waktu");
+  addLast(head, tail, "Surabaya (SUB)", "Tepat Waktu");
+  addLast(head, tail,  "Jakarta (CGK)", "Naik Pesawat");
+  addLast(head, tail,  "Medan (KNO)", "Terlambat");
+  addLast(head, tail,  "Makassar (UPG)", "Tepat Waktu");
+  addLast(head, tail,  "Yogyakarta (YIA)", "Naik Pesawat");
+  addLast(head, tail,  "Denpasar (DPS)", "Terlambat");
+  addLast(head, tail,  "Bandung (BDO)", "Tepat Waktu");
+  addLast(head, tail,  "Semarang (SRG)", "Naik Pesawat");
+  addLast(head, tail,  "Palembang (PLM)", "Terlambat");
+  addLast(head, tail,  "Balikpapan (BPN)", "Tepat Waktu");
 
   do {
     pause(1);
