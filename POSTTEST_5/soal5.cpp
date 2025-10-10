@@ -39,8 +39,12 @@ Node* insert(Node* root, int val) {
 
 void preOrderTraversal(Node* root) {
     // --- LENGKAPI KODE DI SINI ---
+
+    // Base case: Jika root adalah nullptr, return
     if (root == nullptr) return;
     
+    // Cetak data node saat ini terlebih dahulu, kemudian rekursif ke subtree kiri dan kanan
+    // karena pre-order adalah cara menjelajahi tree di mana node akar akan dikunjungi terlebih dahulu kemudian anak kirinya lalu anak kanannya
     cout << root->data << " ";
     preOrderTraversal(root->left);
     preOrderTraversal(root->right);

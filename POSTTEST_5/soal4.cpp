@@ -38,8 +38,12 @@ Node* insert(Node* root, int val) {
  */
 void postOrderTraversal(Node* root) {
     // --- LENGKAPI KODE DI SINI ---
+
+    // Base case: Jika root adalah nullptr, return
     if (root == nullptr) return;
     
+    // Rekursif ke subtree kiri dan kanan terlebih dahulu, baru cetak data node saat ini karena 
+    // post-order adalah cara menjelajahi tree di mana node akar akan dikunjungi setelah anak kirinya dan anak kanannya dikunjungi
     postOrderTraversal(root->left);
     postOrderTraversal(root->right);
     cout << root->data << " ";

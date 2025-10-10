@@ -39,8 +39,11 @@ Node* insert(Node* root, int val) {
  */
 int countNodes(Node* root) {
     // --- LENGKAPI KODE DI SINI ---
+
+    // Menegecek apakah root nullptr, kalo iya berarti tree kosong
     if (root == nullptr) return 0;
 
+    // Karena tree tidak kosong, maka return nilai 1 ditambah dengan hasil rekursif pada subtree kiri dan kanan
     return 1 + countNodes(root->left) + countNodes(root->right);
     // -----------------------------
 }
